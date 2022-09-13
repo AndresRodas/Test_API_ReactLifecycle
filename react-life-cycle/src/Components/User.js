@@ -1,28 +1,29 @@
 import { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { AccionEliminarUsuarios } from "../Redux/actions/UserAction";
+import { Card } from 'primereact/card';
+import { Button } from 'primereact/button';
 
-const User = (props) => {   
+const User = (props) => {
 
+    // eslint-disable-next-line
     const [User, setUser] = useState(props.user)
-    
+    const dispatch = useDispatch()
+
     const handleDelete = async () => {
-        props.AccionEliminarUsuarios(User.id)
+        dispatch(AccionEliminarUsuarios(User.id))
     }
 
     return (
-        <div>
-            <h2>{User.name}</h2>
-            <h3>Username:</h3><h4>{User.username}</h4>
-            <h3>Phone:</h3><h4>{User.phone}</h4>
-            <h3>Email:</h3><h4>{User.email}</h4>
-            <button onClick={handleDelete}>Eliminar usuario</button>
-        </div>
-    );
+        <Card title={User.name}>
+            <div className="card-container">
+                <h3>Nickname: {User.username}</h3>
+                <h3>Telefono: {User.phone}</h3>
+                <h3>Email: {User.email}</h3>
+                <Button onClick={handleDelete} label="Eliminar usuario" className="p-button-danger p-button-rounded"/>
+            </div>
+        </Card>
+    )
 }
 
-const mapDispatchToProps = {
-    AccionEliminarUsuarios
-}
-
-export default connect(null, mapDispatchToProps)(User)
+export default User

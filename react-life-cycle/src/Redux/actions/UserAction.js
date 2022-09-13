@@ -14,4 +14,3 @@ export const AccionEliminarUsuarios = (id) => {
         payload: id
     }
 }
-

@@ -1,35 +1,28 @@
-import { connect } from "react-redux"
+import { useSelector } from "react-redux"
 import { useState, useEffect } from "react";
 import User from "./User";
 
-const UserList = (props) => {
+const UserList = () => {
 
   const [UserList, setUserList] = useState([])
+  const usuario = useSelector((state) => state.Usuario.usuario)
 
+  // eslint-disable-next-line
   useEffect(() => {
-    setUserList(props.Usuario.usuario)
+    setUserList(usuario)
   })
 
   return (
-    <div>
-      <h1>USER LIST</h1>
-      <ul>
+    <div className="card">
+      <div className="flex flex-row flex-wrap card-container">
         {UserList.map(user => (
-          <li key={user.id}>
-            <div>
-              <User user={user} />
-            </div>
-          </li>
+          <div key={user.id} className="flex align-items-center justify-content-center px-4 py-4">
+            <User user={user} />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    Usuario: state.Usuario
-  }
-}
-
-export default connect(mapStateToProps)(UserList);
+export default UserList;

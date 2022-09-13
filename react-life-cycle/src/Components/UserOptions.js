@@ -1,26 +1,28 @@
 import { GetUsers } from "../Services/UserService";
-import { connect } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import { AccionAgregarUsuarios } from "../Redux/actions/UserAction";
+import { Button } from 'primereact/button';
 
-const UserOptions = (props) => {
+const UserOptions = () => {
+
+  const dispatch = useDispatch()
 
   const handleClick = async () => {
     await GetUsers().then(resp => {
-      props.AccionAgregarUsuarios(resp)
+      dispatch(AccionAgregarUsuarios(resp))
     })
   }
 
   return (
-    <div>
-      <h1>USER OPTIONS</h1>
-      <button onClick={handleClick}>Load Users</button>
+    <div className="card">
+      <div className="flex flex-column">
+        <h1>Opciones de Usuario</h1>
+        <Button onClick={handleClick} label="Cargar Usuarios" className="p-button-success p-button-rounded" />
+      </div>
+      <div>
+      </div>
     </div>
   );
 }
 
-const mapDispatchToProps = {
-  AccionAgregarUsuarios
-}
-
-export default connect(null, mapDispatchToProps)(UserOptions);
+export default UserOptions;
