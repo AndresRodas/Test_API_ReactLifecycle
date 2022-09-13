@@ -6,8 +6,7 @@ import { Button } from 'primereact/button';
 
 const User = (props) => {
 
-    // eslint-disable-next-line
-    const [User, setUser] = useState(props.user)
+    const [User, ] = useState(props.user)
     const dispatch = useDispatch()
 
     const handleDelete = async () => {
@@ -20,7 +19,7 @@ const User = (props) => {
                 <h3>Nickname: {User.username}</h3>
                 <h3>Telefono: {User.phone}</h3>
                 <h3>Email: {User.email}</h3>
-                <Button onClick={handleDelete} label="Eliminar usuario" className="p-button-danger p-button-rounded"/>
+                <Button onClick={handleDelete} label="Eliminar usuario" className="p-button-danger p-button-rounded" />
             </div>
         </Card>
     )
